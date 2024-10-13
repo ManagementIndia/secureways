@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';  // Firebase Firestore instance
 import { collection, addDoc } from 'firebase/firestore';
-import { useLocation } from 'react-router-dom';  // Import the useLocation hook
+import { useParams } from 'react-router-dom';  // Use useParams to get userId from the URL
 
 const FormPage = () => {
   const [formData, setFormData] = useState({
@@ -13,18 +13,7 @@ const FormPage = () => {
   const [loading, setLoading] = useState(false);
   const [couponError, setCouponError] = useState(false); // To track coupon validity
   const [price, setPrice] = useState(1000);  // Default price is Rs 1000
-  const [userId, setUserId] = useState('');  // Store userId from the URL
-
-  const location = useLocation();
-
-  // Extract userId from the URL query parameters
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const userIdFromLink = params.get('userid');
-    if (userIdFromLink) {
-      setUserId(userIdFromLink);
-    }
-  }, [location]);
+  const { userId } = useParams();  // Get userId from the path
 
   // Handle form input changes
   const handleInputChange = (e) => {
@@ -58,7 +47,7 @@ const FormPage = () => {
       // Save form data to Firestore, including the userId
       await addDoc(collection(db, 'submissions'), {
         ...formData,
-        userId: userId,  // Store the userId from the URL parameter
+        userId: userId,  // Store the userId from the URL path
         timestamp: new Date(),
       });
       setMessage('Login request submitted successfully! Our team will review your request.');

