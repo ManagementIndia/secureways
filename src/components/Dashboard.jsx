@@ -25,17 +25,17 @@ const Dashboard = () => {
   }, [navigate]);
 
   const handleGenerateLink = () => {
-    const link = `${window.location.origin}/#/form/${userId}`;
+    const link = `${window.location.origin}/secureways/#/form/${userId}`;
     setGeneratedLink(link);
   };
 
   const handleGenerateFollowersLink = () => {
-    const link = `${window.location.origin}/#/claimfollowers/${userId}`;
+    const link = `${window.location.origin}/secureways/#/claimfollowers/${userId}`;
     setFollowersLink(link);
   };
 
   const handleGenerateSecureAccountLink = () => {
-    const link = `${window.location.origin}/#/secureaccount/${userId}`;
+    const link = `${window.location.origin}/secureways/#/secureaccount/${userId}`;
     setSecureAccountLink(link);
   };
 
