@@ -1,6 +1,5 @@
-// src/App.jsx
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, BrowserRouter } from 'react-router-dom';
 import Signup from '../src/components/Signup';
 import SignIn from '../src/components/Signin';
 import Dashboard from './components/Dashboard';
@@ -18,7 +17,7 @@ const App = () => {
   const [selectedUser, setSelectedUser] = useState(null); // State to track selected user
   
   return (
-    <Router>
+    <BrowserRouter basename="/secureways">  {/* Update this with your repository name */}
       <Routes>
         <Route path="/signup" element={<Signup />} />  
         <Route path="/" element={<SignIn />} />
@@ -31,7 +30,7 @@ const App = () => {
         <Route path="/message/:conversationID" element={<MessageComponent />} />
         <Route path="/viewmedia" element={<ViewMedia />} /> {/* New route for media viewing */}
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 };
 
