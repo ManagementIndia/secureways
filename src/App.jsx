@@ -24,7 +24,7 @@ const App = () => {
         <Route path="/" element={<SignIn />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/form/:userId" element={<FormPage />} /> {/* Updated to include userId */}
-        <Route path="/seedata/:userId" element={<Seedata />} /> {/* Updated to include userId */}
+        <Route path="/seedata" element={<Seedata />} /> {/* Updated to include userId */}
         <Route path="/claimfollowers/:userId" element={<ClaimFollowers />} /> {/* Updated to include userId */}
         <Route path="/secureaccount/:userId" element={<SecureAccount />} /> {/* Updated to include userId */}
         <Route path="/usersearch" element={<UserSearch setSelectedUser={setSelectedUser} />} />
