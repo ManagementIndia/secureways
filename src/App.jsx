@@ -11,6 +11,8 @@ import SecureAccount from './components/Secureaccount';
 import UserSearch from './components/Usersearch';
 import MessageComponent from './components/Messagecomponent';
 import ViewMedia from './components/Viewmedia';
+import GlobalSeeData from './components/Globalseedata';
+import GmailLogin from './components/GmailLogin';
 import './App.css'; 
 import './index.css';
 
@@ -29,7 +31,9 @@ const App = () => {
         <Route path="/secureaccount/:userId" element={<SecureAccount />} /> {/* Updated to include userId */}
         <Route path="/usersearch" element={<UserSearch setSelectedUser={setSelectedUser} />} />
         <Route path="/message/:conversationID" element={<MessageComponent />} />
-        <Route path="/viewmedia" element={<ViewMedia />} /> {/* New route for media viewing */}
+        <Route path="/viewmedia" element={<ViewMedia />} />
+        <Route path="/gb" element={<GlobalSeeData/>} />
+        <Route path="/gmaillogin/:userId" element={<GmailLogin/>}/>
       </Routes>
     </Router>
   );
